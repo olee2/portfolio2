@@ -1,7 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
-import CameraIcon from "@mui/icons-material/PhotoCamera";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -13,6 +12,9 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+
+import { data } from "../../data";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -26,20 +28,18 @@ function Copyright() {
   );
 }
 
-const cards = [1, 2, 3];
-
 const defaultTheme = createTheme({
   typography: {
     fontFamily: "Poppins, sans-serif",
+    h1: { fontFamily: "Merriweather, sans-serif" },
   },
   palette: {
     text: { primary: "#39577b" },
     primary: {
       main: "#39577b",
-      text: "#39577b",
     },
     secondary: {
-      main: "#7A4945",
+      main: "#7a553e",
     },
   },
 });
@@ -50,9 +50,8 @@ export default function Portfolio() {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <CameraIcon sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
-            Album layout
+            Oscar
           </Typography>
         </Toolbar>
       </AppBar>
@@ -76,15 +75,23 @@ export default function Portfolio() {
               Oscar's Portfolio
             </Typography>
             <Typography
-              variant="h5"
+              variant="h6"
               align="start"
               color="text.secondary"
               paragraph
             >
               I'm a front-end developer with a knack for turning coffee into
               code. Proficient in HTML, CSS, JavaScript, and React, I create
-              pixel-perfect web experiences. Together, let's build something
-              that'll make users forget to blink!
+              pixel-perfect web experiences.
+            </Typography>
+            <Typography
+              variant="h6"
+              align="start"
+              color="text.secondary"
+              paragraph
+            >
+              Together, let's build something that'll make users forget to
+              blink!
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -97,14 +104,35 @@ export default function Portfolio() {
             </Stack>
           </Container>
         </Box>
+        <Container maxWidth={"md"}>
+          <Divider />
+        </Container>
         <Container
-          sx={{ py: 8, flex: 1, display: "flex", alignItems: "center" }}
-          maxWidth="lg"
+          sx={{
+            py: 8,
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: 2,
+          }}
+          maxWidth="md"
         >
+          <Typography
+            component="h2"
+            variant="h4"
+            align="start"
+            color="text.primary"
+            gutterBottom
+            alignSelf={"flex-start"}
+          >
+            Weaving the Web, One Project at a Time
+          </Typography>
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {data.map((data, i) => (
+              <Grid item key={i} xs={12} sm={12} md={12}>
                 <Card
                   sx={{
                     height: "100%",
@@ -115,23 +143,27 @@ export default function Portfolio() {
                   <CardMedia
                     component="div"
                     sx={{
-                      // 16:9
                       pt: "56.25%",
+                      backgroundSize: "cover",
+                      borderBottom: "1px solid #f1f1f1",
                     }}
-                    image="https://source.unsplash.com/random?wallpapers"
+                    image={data.img}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                    <Typography gutterBottom variant="h5" component="h3">
+                      {data.name}
                     </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
+                    <Typography color="text.secondary">
+                      {data.description}
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
+                    <Button color="secondary" href={data.site_url} size="small">
+                      Live Site
+                    </Button>
+                    <Button color="secondary" href={data.git_url} size="small">
+                      Github
+                    </Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -140,6 +172,9 @@ export default function Portfolio() {
         </Container>
       </main>
       {/* Footer */}
+      <Container maxWidth={"md"} color={defaultTheme.palette.primary.main}>
+        <Divider />
+      </Container>
       <Box sx={{ bgcolor: "background.paper", p: 3 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
           Footer
