@@ -173,10 +173,23 @@ function App() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button color="secondary" href={data.site_url} size="small">
+                    <Button
+                      target="_blank"
+                      rel="noreferrer"
+                      color="secondary"
+                      href={data.site_url}
+                      size="small"
+                    >
                       Live Site
                     </Button>
-                    <Button color="secondary" href={data.git_url} size="small">
+                    <Button
+                      target="_blank"
+                      rel="noreferrer"
+                      referrerPolicy="noRefferer"
+                      color="secondary"
+                      href={data.git_url}
+                      size="small"
+                    >
                       Github
                     </Button>
                   </CardActions>
@@ -202,10 +215,18 @@ function App() {
         component="footer"
       >
         <Box display={"flex"} gap={2}>
-          <Link href="https://www.linkedin.com/in/ole-andr%C3%A9-eikrem-1b0752202/">
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.linkedin.com/in/ole-andr%C3%A9-eikrem-1b0752202/"
+          >
             <img src={linked} alt="linkedin logo" />
           </Link>
-          <Link href="https://github.com/olee2">
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/olee2"
+          >
             <img src={git} alt="github logo" />
           </Link>
         </Box>
