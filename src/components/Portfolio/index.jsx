@@ -13,6 +13,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
+import { Link } from "@mui/material";
+import git from "../../assets/github.svg";
+import linked from "../../assets/linkedIn.svg";
+import FormDialog from "../FormDialog";
 
 import { data } from "../../data";
 
@@ -31,8 +35,9 @@ function Copyright() {
 const defaultTheme = createTheme({
   typography: {
     fontFamily: "Poppins, sans-serif",
-    h1: { fontFamily: "Merriweather, sans-serif" },
+    secondFontFamily: "Merriweather, serif",
   },
+
   palette: {
     text: { primary: "#39577b" },
     primary: {
@@ -45,18 +50,26 @@ const defaultTheme = createTheme({
 });
 
 export default function Portfolio() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Oscar
+            Oscar's Portfolio
           </Typography>
         </Toolbar>
       </AppBar>
       <main style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: "background.paper",
@@ -64,15 +77,16 @@ export default function Portfolio() {
             pb: 6,
           }}
         >
-          <Container maxWidth="md">
+          <Container maxWidth="lg">
             <Typography
               component="h1"
+              fontFamily={defaultTheme.typography.secondFontFamily}
               variant="h3"
               align="start"
               color="text.primary"
               gutterBottom
             >
-              Oscar's Portfolio
+              Hi, I'm Oscar
             </Typography>
             <Typography
               variant="h6"
@@ -99,12 +113,14 @@ export default function Portfolio() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
+              <Button variant="contained" onClick={handleClickOpen}>
+                Get in Touch
+              </Button>
+              <FormDialog open={open} handleClose={handleClose} />
             </Stack>
           </Container>
         </Box>
-        <Container maxWidth={"md"}>
+        <Container maxWidth={"lg"}>
           <Divider />
         </Container>
         <Container
@@ -117,7 +133,7 @@ export default function Portfolio() {
             justifyContent: "center",
             gap: 2,
           }}
-          maxWidth="md"
+          maxWidth="lg"
         >
           <Typography
             component="h2"
@@ -126,13 +142,14 @@ export default function Portfolio() {
             color="text.primary"
             gutterBottom
             alignSelf={"flex-start"}
+            fontFamily={defaultTheme.typography.secondFontFamily}
           >
             Weaving the Web, One Project at a Time
           </Typography>
-          {/* End hero unit */}
+
           <Grid container spacing={4}>
             {data.map((data, i) => (
-              <Grid item key={i} xs={12} sm={12} md={12}>
+              <Grid item key={i} xs={12} sm={12} md={6}>
                 <Card
                   sx={{
                     height: "100%",
@@ -150,7 +167,12 @@ export default function Portfolio() {
                     image={data.img}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h3">
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="h3"
+                      fontFamily={defaultTheme.typography.secondFontFamily}
+                    >
                       {data.name}
                     </Typography>
                     <Typography color="text.secondary">
@@ -171,25 +193,31 @@ export default function Portfolio() {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
-      <Container maxWidth={"md"} color={defaultTheme.palette.primary.main}>
+
+      <Container maxWidth={"lg"} color={defaultTheme.palette.primary.main}>
         <Divider />
       </Container>
-      <Box sx={{ bgcolor: "background.paper", p: 3 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
+      <Box
+        sx={{
+          bgcolor: "background.paper",
+          p: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+        }}
+        component="footer"
+      >
+        <Box display={"flex"} gap={2}>
+          <Link href="https://www.linkedin.com/in/ole-andr%C3%A9-eikrem-1b0752202/">
+            <img src={linked} alt="" />
+          </Link>
+          <Link href="https://github.com/olee2">
+            <img src={git} alt="" />
+          </Link>
+        </Box>
         <Copyright />
       </Box>
-      {/* End footer */}
     </ThemeProvider>
   );
 }
